@@ -52,7 +52,7 @@
     // Diese Methode wird aufgerufen, sobald die Komponente in die Webseite geladen wird
     mounted() {
       // HTTP-Anfrage an das Backend (Spring Boot) zum Abrufen der Trainingspläne
-      axios.get('http://localhost:8081/api/plans') // URL meiner API
+      axios.get('https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans') // URL meiner API
         .then(response => {
           // Wenn die Anfrage erfolgreich war, speichere die Antwortdaten (Trainingspläne) in "plans"
           console.log(response.data);  //Daten in der Konsole anzeigen
