@@ -1,56 +1,82 @@
 <template>
-
-<img alt="Logo" src="./assets/FitnessLogo.png" class="logo">
-
-<!-- <HelloWorld msg="Your perfect Training Plan to boost your Performance!"/> -->
+  <!-- Logo und Haupttitel der App -->
+  <img alt="Logo" src="./assets/FitnessLogo.png" class="logo">
 
   <div id="app">
-    <!-- Überschrift, die den Bereich "Trainingspläne" beschreibt -->
+    <!-- Hauptüberschrift für den Bereich "Trainingspläne" -->
     <h1>Trainingspläne</h1>
-    <h2>Dein perfekter Trainingsplan um deine Performance zu steigern!</h2>
+    <h2>Dein perfekter Trainingsplan, um deine Performance zu steigern!</h2>
 
-    <!-- Hier wird die PlanList-Komponente eingefügt, die die Liste der Trainingspläne rendert -->
+    <!-- Einfügen der PlanList-Komponente, die die Planerstellung und -anzeige übernimmt -->
     <PlanList />
   </div>
 </template>
 
 <script>
-// Importiere die PlanList-Komponente, die wir gerade erstellt haben
+// Import der PlanList-Komponente
 import PlanList from './components/PlanList.vue';
 
 export default {
   name: 'App', // Name der Hauptkomponente
-
-  // Wir fügen die PlanList-Komponente in diese Hauptkomponente ein
   components: {
-    PlanList
+    PlanList // Einbinden der PlanList-Komponente
   }
 };
 </script>
 
 <style>
-/* Styling für das Logo */
+/* Gesamtes App-Layout-Styling */
+#app {
+  text-align: center; /* Zentriert den gesamten Inhalt */
+  font-family: 'Arial', sans-serif; /* Definiert eine klare, gut lesbare Schriftart */
+  color: #333; /* Setzt die Hauptfarbe des Textes auf ein dunkles Grau */
+  margin-top: 20px; /* Abstand nach oben */
+}
+
+/* Logo-Styling */
 .logo {
-  display: block;
-  margin: 0 auto;
-  width: 150px; /* Breite des Logos */
-  height: 150px; /* Höhe passt sich automatisch an */
-  margin-bottom: 20px; /* Abstand unter dem Logo */
+  display: block; /* Block-Darstellung für das Logo */
+  margin: 0 auto; /* Zentriert das Logo horizontal */
+  width: 120px; /* Setzt die Breite des Logos */
+  height: auto; /* Beibehaltung des Seitenverhältnisses */
+  border-radius: 50%; /* Rundes Design für das Logo */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Tiefe */
+  margin-bottom: 20px; /* Abstand zum darunterliegenden Inhalt */
 }
 
-/* Styling für Header */
+/* Hauptüberschrift für den Titel "Trainingspläne" */
 h1 {
-  text-align: center; /* Zentriert die Überschrift */
-  color: #ff4d01; /* Setzt die Farbe der Überschrift auf Grün */
+  font-size: 2.5rem; /* Große Schriftgröße */
+  font-weight: bold; /* Fettdruck für Wichtigkeit */
+  color: #ff4d4d; /* Auffällige Farbe passend zur Fitness-Thematik */
+  margin-bottom: 10px; /* Abstand nach unten */
 }
 
-/* Styling für den Untertitel */
+/* Untertitel für eine Beschreibung unterhalb des Haupttitels */
 h2 {
-  text-align: center; /* Zentriert den Text */
-  color: #0a0000; /* Setzt eine neutrale Schriftfarbe */
-  font-size: 1.5em; /* Setzt eine angemessene Schriftgröße */
-  margin-bottom: 20px; /* Abstand unter dem Text */
+  font-size: 1.25rem; /* Etwas kleinere Schriftgröße als die Hauptüberschrift */
+  color: #666; /* Dezente graue Farbe */
+  font-weight: 300; /* Leichtes Schriftgewicht für weniger Dominanz */
+  margin-bottom: 30px; /* Abstand zum Hauptinhalt */
+}
+
+/* Hintergrund-Styling */
+body {
+  background-color: #f7f7f7; /* Setzt einen hellgrauen Hintergrund für eine freundliche Optik */
+}
+
+/* Für responsives Design: Optimierung für kleinere Bildschirme */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem; /* Anpassung der Schriftgröße auf kleinen Bildschirmen */
+  }
+
+  h2 {
+    font-size: 1rem; /* Kleinere Untertitelgröße für mobile Ansicht */
+  }
+
+  .logo {
+    width: 100px; /* Verkleinert das Logo auf kleinen Bildschirmen */
+  }
 }
 </style>
-
-
