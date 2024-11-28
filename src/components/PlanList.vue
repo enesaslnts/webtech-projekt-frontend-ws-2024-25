@@ -109,7 +109,7 @@ export default {
   methods: {
     // Methode zum Abrufen aller vorhandenen Pläne vom Backend
     fetchPlans() {
-      axios.get('http://localhost:8080/api/plans')
+      axios.get('https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans')
         .then(response => {
           this.plans = response.data.map(plan => ({...plan,
             days: plan.days.map(day => ({...day,
@@ -182,7 +182,7 @@ export default {
 
   console.log("Senden des neuen Plans an das Backend:", newPlan);
 
-  axios.post('http://localhost:8080/api/plans', newPlan)
+  axios.post('https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans', newPlan)
     .then(response => {
       console.log("Plan erfolgreich hinzugefügt:", response.data);
       this.plans.push(response.data);
@@ -198,7 +198,7 @@ export default {
 
     // Methode zum Löschen eines Plans basierend auf seiner ID
     deletePlan(id) {
-      axios.delete(`http://localhost:8080/api/plans/${id}`)
+      axios.delete(`https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans/${id}`)
         .then(() => {
           this.plans = this.plans.filter(plan => plan.id !== id); // Entfernt den Plan aus der plans-Liste
         })
