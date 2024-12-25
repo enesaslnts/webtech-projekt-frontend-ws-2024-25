@@ -40,9 +40,9 @@
     <ul class="exercise-list">
       <li v-for="(exercise, index) in newExercises" :key="index" class="exercise-item">
         <!-- Anzeige des Trainingstags und der Übungsdetails oder "Rest Day" -->
-        {{ exercise.day }}: 
+        {{ exercise.workoutDayName }}: 
         <span v-if="exercise.isRestDay">Rest Day</span>
-        <span v-else>{{ exercise.exercise }}: {{ exercise.sets }} Sätze, {{ exercise.reps }} Wiederholungen</span>
+        <span v-else>{{ exercise.exerciseName }}: {{ exercise.exerciseSets }} Sätze, {{ exercise.exerciseReps }} Wiederholungen</span>
         
         <!-- Button zum Entfernen der Übung aus der Liste -->
         <button @click="removeExercise(index)" class="button remove-button">Entfernen</button>
@@ -59,26 +59,26 @@
 
     <!-- Liste der gespeicherten Pläne aus dem Backend anzeigen -->
     <ul v-else class="plan-list">
-      <li v-for="plan in plans" :key="plan.id" class="plan-item">
+      <li v-for="plan in plans" :key="plan.planId" class="plan-item">
         <!-- Plan-Name anzeigen -->
-        <h2>{{ plan.name }}</h2>
+        <h2>{{ plan.planName }}</h2>
         <ul>
           <!-- Anzeigen der Tage im Plan, einschließlich Übungen oder Rest Days -->
-          <li v-for="day in plan.days" :key="day.id">
-            {{ day.day }}:
+          <li v-for="day in plan.workoutDays" :key="day.workoutDayId">
+            {{ day.workoutDayName }}:
             <span v-if="day.restDay">Rest Day</span> 
             <span v-else>
               <ul>
                 <!-- Anzeigen jeder Übung am jeweiligen Tag -->
-                <li v-for="exercise in day.workout" :key="exercise.id">
-                  {{ exercise.exercise }}: {{ exercise.sets }} Sätze, {{ exercise.reps }} Wiederholungen
+                <li v-for="exercise in day.exercises" :key="exercise.exerciseId">
+                  {{ exercise.exerciseName }}: {{ exercise.exerciseSets }} Sätze, {{ exercise.exerciseReps }} Wiederholungen
                 </li>
               </ul>
             </span>
           </li>
         </ul>
         <!-- Button zum Löschen des Plans -->
-        <button @click="deletePlan(plan.id)" class="button remove-button">Plan löschen</button>
+        <button @click="deletePlan(plan.planId)" class="button remove-button">Plan löschen</button>
       </li>
     </ul>
   </div>
@@ -112,8 +112,8 @@ export default {
       axios.get('https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans')
         .then(response => {
           this.plans = response.data.map(plan => ({...plan,
-            days: plan.days.map(day => ({...day,
-              isRestDay: day.restDay
+            workoutDays: plan.workoutDays.map(day => ({...day,
+              restDay: day.restDay
             }))
           })); // Speichert die zurückgegebenen Pläne in der plans-Liste
 
@@ -133,19 +133,19 @@ export default {
       // Fügt entweder einen Rest Day oder eine Übung zur Liste hinzu
       if (this.isRestDay) {
         this.newExercises.push({
-          day: this.selectedDay,
+          workoutDayName: this.selectedDay,
           isRestDay: true,
-          workout: []
+          exercises: []
         });
       } else {
         this.newExercises.push({
-          day: this.selectedDay,
+          workoutDayName: this.selectedDay,
           isRestDay: false,
-          workout: [
+          exercises: [
             {
-              exercise: this.newExerciseName,
-              sets: this.newExerciseSets,
-              reps: this.newExerciseReps
+              exerciseName: this.newExerciseName,
+              exerciseSets: this.newExerciseSets,
+              exerciseReps: this.newExerciseReps
             }
           ]
         });
@@ -172,11 +172,11 @@ export default {
   }
 
   const newPlan = {
-    name: this.newPlanName,
-    days: this.newExercises.map(exercise => ({
-      day: exercise.day,
+    planName: this.newPlanName,
+    workoutDays: this.newExercises.map(exercise => ({
+      workoutDayName: exercise.workoutDayName,
       restDay: exercise.isRestDay,
-      workout: exercise.isRestDay ? [] : exercise.workout // Leere Liste für Rest Days
+      exercises: exercise.isRestDay ? [] : exercise.exercises // Leere Liste für Rest Days
     }))
   };
 
@@ -197,10 +197,10 @@ export default {
 ,
 
     // Methode zum Löschen eines Plans basierend auf seiner ID
-    deletePlan(id) {
-      axios.delete(`https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans/${id}`)
+    deletePlan(planId) {
+      axios.delete(`https://webtech-projekt-backend-ws-2024-25.onrender.com/api/plans/${planId}`)
         .then(() => {
-          this.plans = this.plans.filter(plan => plan.id !== id); // Entfernt den Plan aus der plans-Liste
+          this.plans = this.plans.filter(plan => plan.planId !== planId); // Entfernt den Plan aus der plans-Liste
         })
         .catch(error => {
           console.error("Fehler beim Löschen des Plans:", error);
