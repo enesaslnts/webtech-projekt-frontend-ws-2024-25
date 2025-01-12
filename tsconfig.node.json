@@ -20,11 +20,6 @@
         "types": [
             "node"
         ],
-        "include": [
-            "vite.config.ts",
-            "vitest.config.ts",
-            "**/*.ts",
-            "**/*.d.ts"
-        ]
     }
+    
 }
