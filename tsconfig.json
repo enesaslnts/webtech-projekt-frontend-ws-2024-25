@@ -1,51 +1,30 @@
 {
     "compilerOptions": {
-        "target": "ESNext", // Unterstützt die neueste JS-Syntax
-        "module": "ESNext", // ESNext-Module für moderne Build-Systeme
-        "moduleResolution": "Node", // Node-Modulauflösung
-        "strict": true, // Aktiviert den strikten Modus
-        "jsx": "preserve", // Unterstützt JSX, falls benötigt (z. B. für Vue)
-        "esModuleInterop": true, // Ermöglicht den Import von CommonJS-Modulen
-        "forceConsistentCasingInFileNames": true, // Erzwingt einheitliche Groß-/Kleinschreibung
-        "skipLibCheck": true, // Beschleunigt den Build-Prozess, indem Bibliotheken nicht geprüft werden
-        "baseUrl": ".", // Basis-URL für die Modulauflösung
-        "paths": {
-            "@/*": [
-                "src/*"
-            ] // Alias für src/
-        },
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable",
-            "ScriptHost"
-        ], // Unterstützt moderne Browser- und Node-Funktionen
-        "types": [
-            "node",
-            "vitest/globals"
-        ] // Stellt die Typen für Node.js und Vitest bereit
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "strict": true,
+      "jsx": "preserve",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "skipLibCheck": true,
+      "baseUrl": "./", // Basis für alle relativen Pfade
+      "paths": {
+        "@/*": ["src/*"] // Alias für src/
+      },
+      "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
+      "types": ["node", "vitest/globals"]
     },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "vite.config.ts",
-        "vitest.config.ts"
-    ], // Zu analysierende Dateien
+      "./src/**/*.ts",
+      "./src/**/*.d.ts",
+      "./src/**/*.tsx",
+      "./src/**/*.vue",
+      "vite.config.ts",
+      "vitest.config.ts"
+    ],
     "exclude": [
-        "node_modules",
-        "dist"
-    ], // Ignorierte Ordner
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        },
-        {
-            "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.vitest.json"
-        }
+      "node_modules",
+      "dist"
     ]
-}
+  }  
